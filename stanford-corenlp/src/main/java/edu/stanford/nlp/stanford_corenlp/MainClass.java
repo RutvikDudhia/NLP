@@ -32,7 +32,7 @@ import edu.stanford.nlp.*;
  * Hello world!
  *
  */
-public class App {
+public class MainClass {
 	public static void main(String[] args) {
 		Properties props = new Properties();
 		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
