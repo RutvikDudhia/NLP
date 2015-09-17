@@ -1,6 +1,7 @@
 package edu.stanford.nlp.stanford_corenlp;
 
 import java.util.Properties;
+import java.util.Scanner;
 
 import edu.stanford.nlp.ling.CoreAnnotations.NamedEntityTagAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.PartOfSpeechAnnotation;
@@ -22,7 +23,9 @@ public class MainClass {
 		Properties props = new Properties();
 		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 		props.setProperty("annotators", "tokenize, ssplit,pos,parse,dcoref");
-		String text = "What is the flight schedule?";
+		System.out.println("Ask a question");
+		Scanner in = new Scanner(System.in);
+		String text = in.nextLine();
 		Annotation document = new Annotation(text);
 		pipeline.annotate(document);
 		Tree tree = null;
@@ -35,15 +38,16 @@ public class MainClass {
 			for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
 				// this is the text of the token
 				String word = token.get(TextAnnotation.class);
-			
+//				System.out.println("The word is" + word);
+				// this is the POS tag of the token
 				String pos = token.get(PartOfSpeechAnnotation.class);
-			 // System.out.println("The pos is" + pos);
+//				System.out.println("The pos is" + pos);
 
 				if (pos.startsWith("NN")) {
 					queryString = queryString + " " + word;
 				}
 				String ne = token.get(NamedEntityTagAnnotation.class);
-			
+//				System.out.println("The entity is" + ne);
 			}
 
 			tree = sentence.get(TreeAnnotation.class);
